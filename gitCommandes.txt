@@ -1,0 +1,115 @@
+#regle
+tjrs travailler sur des branches avant de faire des merges vers le master
+
+#cmd de bases
+git log --oneline
+git status
+git commit -a -m "message du commit" #l'option -a marche seulement si le fichier est deja traqué
+
+#merge
+git checkout master
+git merge maBranche #envoyer les modification de maBranche sur master. crée un commit supplémentaire de merge
+
+#rebase fast forward : avoir un historique clean entre les différentes avant de faire leur merge
+git checkout maBranche
+git rebase master #envoi dans master les modifs effectuées sur maBranche. A cette etape, maBranche les modification de maBranche et de master.   	
+git checkout master
+git merge maBranche
+#le fast-forward se passe quand il n'y a pas eu de commit intermédiaire entre les branches
+
+#rebase interactif : effectuer les changements voulus sur les commits avant de fair un merge 
+git checkout maBranche
+git rebase -i master #(i pour le mode  interactif : permet de faire pleins de changement dans les commits, ex:mode squash)
+git checkout master
+git merge maBranche
+
+#rebase des deux derniers commits dans l'ordre pour le change de l'historique
+git rebase -i HEAD~2 
+
+#annule le commit (num_comit)
+git revert (num_comit)
+
+#revenir en arrière
+git reset HEAD^^|(num_comit) --soft
+git reset HEAD^^|(num_comit) --mixed
+git reset HEAD^^|(num_comit) --hard
+
+#appliquer les changements actuels au dernier commit
+git commit --amend 
+
+
+#remisage (stash) : sauvegarder le travail en cours sans avoir besoin de commiter (utile lors du changement de branche)
+git stash | git stash save monMessage #supprime les modifications en cours et les sauvegarde en mémoire 
+git stash list #affiche la liste des sauvegardes
+git stash apply #rapatrie ce qui a été sauvegarder
+git stash drop #supprimer derniere sauvegarde
+git stash drop stash@{0} #supprimer la sauvearde stash@{0}
+git stash show stash@{0} #affiche en detail l'élément stash@{0} sauvergardé  
+
+
+#remote
+git init --bare #initialiser un dépot distant git
+git add origin "c:user\depot-remote" #ajouter le chemin vers le depot distant 
+git remote -v #liste des différents remotes
+git branch -r #liste des branches en remote
+git push origin master #envoyer la branch master sur le depôt distant
+git remote rename origin nouveauNom #renommé le dépôt origine en nouveauNom
+
+#supprimer la branche test
+git branch -d test
+git push origin --delete test
+
+#cloner un depot  
+git clone "cheminVersLeDepot"
+git clone "cheminVersLeDepot" --depth 1 #recupère juste le dernier commit récent
+
+#retreive master's branch commit from origin to local repos 
+git pull origin master
+git pull --rebase origin master #avoir un historique plus propre que le pull de base
+git config --global branc.autosetuprebase always #setup the default pull to rebase
+
+#définir que la branch sur laquelle on est est associée à la branche master de origin dans le cas d'un push (uptream => en avant)
+git push --set-upstream origin master
+
+#résoudre un issue => on fait un commit avec un message spécial
+git commit -a -m "fixes #NUM_DE_ISSUE, mon message"
+
+#fork & pull request => travailler sur le projet d'un autre
+
+#1 fork => faire une image d'un repository d'autrui vers notre depot 
+#2 clone => on fait un clone de ce quon a sur notr repo en local 
+#on peu a présent créer des branches où on va travailler avant de faire ensuite un merge sur la branche master
+#3 pull request => pour demander la validation de ce qu'on a fait au propriétaire du dépot principal
+
+#revenir au niveau du dépot original distant qui serait en avance (upstream) sur notre depot
+git remote add upstream "depot_en_avance.git"
+git fetch upstream #recupère les informations du dépot
+git branch -a #verifier si on a bien les branches issues de upstream
+git merge upstream/master #faire la fusion de mon master avec le master de upstream
+
+#des que l'on fait un fork et qu'on l'import en local, 
+#1 ajoute le upstream
+#2 faire le fecth
+#3 puis le merge de la branch master
+
+#hooks
+programmer une action quand il y a un changement sur le repositiory
+
+
+#git flow
+#SourceTree
+ajoute le git flow avec sourcetree. interessant lors d'un projet quand on développe des fonctionnalités. pratiques pour ajoute des branches par défaut
+Repository->Git Flow->Initialise repository for Git Flow
+On pourra ensuite via le menu Git Flow, créer un branche pour regler un souci ou développer une fonctionnalité.
+On travalleras depuis la branche master.
+Tout ce systeme permet d'avoir une bonne nomenclature (une conventiond de nommage) des branches afin de mieux se retrouver dans son travail.
+
+#en Ligne de cmd
+git flow init #dans le repertoire d'un repo git, active git flow
+git flow feature start nomChoisit #creer une branch feature/nomChoisit 
+git flow feature publish nomChoisit #envoi sur le depot distant
+git flow feature pull origin nomChoisit | git pull feature/nomChoisit
+git flow feature finish origin nomChoisit #fusionne feature/nomChoisit à la branche develop; delete la branche feature/nomChoisit et se positionne sur develop
+
+git flow realease start nomChoisit #creer une branch feature/nomChoisit 
+git flow realease finish 'v0.0.1' #when done
