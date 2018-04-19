@@ -1,6 +1,6 @@
-# git
-This repository contains a file that resumes useful git commands.
-							---
-Le fichier joint à ce repository contient quelques commandes git utiles.
+# Most useful git commands
+<p>This repository contains a file that resumes useful git commands</p>
+						
+<p>Le fichier joint à ce repository contient quelques commandes git utiles</p>
 
 
