@@ -1,5 +1,6 @@
 #regle
 tjrs travailler sur des branches avant de faire des merges vers le master
+Site assez intéressant pour git : http://rogerdudler.github.io/git-guide/index.fr.html
 
 #cmd de bases
 git log --oneline
