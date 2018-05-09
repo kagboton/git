@@ -50,7 +50,7 @@ git stash show stash@{0} #affiche en detail l'élément stash@{0} sauvergardé
 
 #remote
 git init --bare #initialiser un dépot distant git
-git add origin "c:user\depot-remote" #ajouter le chemin vers le depot distant 
+git remote add origin "c:user\depot-remote" #ajouter le chemin vers le depot distant 
 git remote -v #liste des différents remotes
 git branch -r #liste des branches en remote
 git push origin master #envoyer la branch master sur le depôt distant
