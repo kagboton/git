@@ -31,9 +31,11 @@ git rebase -i HEAD~2
 git revert (num_comit)
 
 #revenir en arrière
-git reset HEAD^^|(num_comit) --soft
-git reset HEAD^^|(num_comit) --mixed
-git reset HEAD^^|(num_comit) --hard
+#Nous avions un historique A->B->C et on est actuellement sur C
+#On veut revenir sur B et réécrire C
+git reset HEAD~|(num_comit) --soft #rebase sur le depot distant
+git reset HEAD~|(num_comit) --mixed #rebase sur le depot distant et sur l'index
+git reset HEAD~|(num_comit) --hard #rebase tout (local, index, depot distan)
 
 #appliquer les changements actuels au dernier commit
 git commit --amend 
