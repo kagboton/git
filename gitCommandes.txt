@@ -98,7 +98,7 @@ git merge upstream/master #faire la fusion de mon master avec le master de upstr
 #hooks
 programmer une action quand il y a un changement sur le repositiory
 
-
+=============================
 #git flow
 #SourceTree
 ajoute le git flow avec sourcetree. interessant lors d'un projet quand on développe des fonctionnalités. pratiques pour ajoute des branches par défaut
@@ -109,10 +109,22 @@ Tout ce systeme permet d'avoir une bonne nomenclature (une conventiond de nommag
 
 #en Ligne de cmd
 git flow init #dans le repertoire d'un repo git, active git flow
-git flow feature start nomChoisit #creer une branch feature/nomChoisit 
-git flow feature publish nomChoisit #envoi sur le depot distant
-git flow feature pull origin nomChoisit | git pull feature/nomChoisit | git flow feature track nomChoisit
-git flow feature finish nomChoisit #fusionne feature/nomChoisit à la branche develop; delete la branche feature/nomChoisit et se positionne sur develop
 
-git flow realease start nomChoisit #creer une branch feature/nomChoisit 
-git flow realease finish 'v0.0.1' #when done
+git flow feature start nomFonctionalite #crée une branch feature/nomFonctionalite en partant de la branche develop
+
+git flow feature publish nomFonctionalite #envoi les modifications effectuées en local vers le depot distant. Les autres developpeurs pourront ainsi voir le travail que vous faites
+
+git flow feature pull origin nomFonctionalite | git pull feature/nomFonctionalite | git flow feature track nomFonctionalite #rappatrier le travail d'un developpeur en local
+
+git flow feature finish nomFonctionalite #remène (merge) les modification de la branche feature/nomFonctionalite à la branche develop; delete la branche feature/nomFonctionalite et se positionne sur develop
+
+=============================
+#Faire une realease => publier une fonctionnalité terminée
+
+git flow realease start nomRealeaseChoisit #creer une branch realease/nomRealeaseChoisit 
+git flow release publish nomRealeaseChoisit #tout comme git flow feature publish, permet d'envoyer la branch realease sur le serveur distant. Les autres developpeurs pouront ainsi valider la realease
+git flow release track nomRealeaseChoisit #tacker une realease en cours
+git flow realease finish nomRealeaseChoisit #pour finir la realise. merge la branch realease avec la branch master avec le tag choisit, merge aussi la brach realease avec la branch develop, supprime la branche realease. 
+git push origin --tags #ne pas oublier de pusher avec les tags
+
+Git Flow Credits : http://danielkummer.github.io/git-flow-cheatsheet/
