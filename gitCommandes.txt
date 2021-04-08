@@ -123,7 +123,7 @@ git flow feature finish nomFonctionalite #remène (merge) les modification de la
 
 git flow realease start nomRealeaseChoisit #creer une branch realease/nomRealeaseChoisit 
 git flow release publish nomRealeaseChoisit #tout comme git flow feature publish, permet d'envoyer la branch realease sur le serveur distant. Les autres developpeurs pouront ainsi valider la realease
-git flow release track nomRealeaseChoisit #tacker une realease en cours
+git flow release track nomRealeaseChoisit #tracker une realease en cours
 git flow realease finish nomRealeaseChoisit #pour finir la realise. merge la branch realease avec la branch master avec le tag choisit, merge aussi la brach realease avec la branch develop, supprime la branche realease. 
 git push origin --tags #ne pas oublier de pusher avec les tags
 
