@@ -11,9 +11,26 @@ git commit -a -m "message du commit" #l'option -a marche seulement si le fichier
 git checkout master
 git merge maBranche #envoyer les modification de maBranche sur master. crée un commit supplémentaire de merge
 
-#rebase fast forward : avoir un historique clean entre les différentes avant de faire leur merge
+#rebase fast forward : avoir un historique clean entre les différentes branches avant de faire leur merge. On veut recuperer les maj presentes sur master et ajouter nos modifications par dessus 
 git checkout maBranche
-git rebase master #envoi dans master les modifs effectuées sur maBranche. A cette etape, maBranche les modification de maBranche et de master.   	
+
+#1ere facon de faire
+====================
+git pull -r origin master #en faisant cette commande on va recuperer les maj de master dans notre branch. A cette etape on aura surement plusieurs conflits à gérer manuellement en parcourant les commits locaux 1 à 1
+
+#apres les modifications, il faut les rajouter dans la zone de stagging
+git add.
+
+#continuer le rebase
+git rebase --continue #apres cette commande il se peut qu'on ait encore d'autre commit. Il va falloir regler les conflits manuellement, rajouter les modifs dans la zone de stagging et continuer le rebase
+
+#une fois les conflits reglé, tout sera propre. Il va falloir pousser les modifs local de maBranch vers le depot distant sur origin/maBranch. A ce niveau, il va falloir forcer le push
+git push -f #notre branch est maintenant propre avec nos modifications et celles de master. on peut maintenant faire un Pull Request pour merger le tout dans master
+
+#Autre facon de faire :: a confirmer
+======================
+git rebase master #envoi dans master les modifs effectuées sur maBranche. A cette etape, maBranche contient les modifications de maBranche + master.   	
+
 git checkout master
 git merge maBranche
 #le fast-forward se passe quand il n'y a pas eu de commit intermédiaire entre les branches
