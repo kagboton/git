@@ -18,7 +18,9 @@ git checkout maBranche
 ====================
 
 #a faire si on veut regrouper les commits
-git rebase -i HEAD~3 # rassembler tous les commits en 1 seul. ici il prend les 3 derniers commits depuis le haut. Le -i est le mode interactif. 2 menus d'editions vont s'ouvrir l'un a la suite de l'autre, il faudra mettre 's' ou 'squash' a la place de pick devant les commits que l'on veut squash et commenter les messages de commit qu'on ne souhaite pas garder. 
+git rebase -i HEAD~3 # rassembler tous les commits en 1 seul. ici il prend les 3 derniers commits depuis le haut. Le -i est le mode interactif. 
+2 menus d'editions vont s'ouvrir l'un a la suite de l'autre, il faudra mettre 's' ou 'squash' a la place de pick devant les commits que l'on veut 
+squash et commenter les messages de commit qu'on ne souhaite pas garder. 
 
 git pull -r origin master #en faisant cette commande on va recuperer les maj de master dans notre branch. A cette etape on aura surement plusieurs conflits à gérer manuellement en parcourant les commits locaux 1 à 1 si on a pas un seul commit. 
 
